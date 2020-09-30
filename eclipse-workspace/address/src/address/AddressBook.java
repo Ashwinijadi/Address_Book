@@ -1,21 +1,49 @@
 package address;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class AddressBook{
-	//Contact Instance Variables
-			private String lastName;
-			private String firstName;
-			private String addressCity;
-			private String state;
-			private String phoneNumber;
-			private String email;
-			private String zip;
-			public void printContacts() {
-				System.out.println("lastName : " + lastName + "\nfirstName :" + firstName + 
-				 "\naddressCity : " + addressCity+ "\nstate :" + state+ "\nphoneNumer :" 
-				  + phoneNumber+ "\nemail :" + email+ "\nzip :" +zip );
-		}
+	private static Scanner scanner = new Scanner(System.in);
+	private static Contacts contactsList = new Contacts();
+	ArrayList<Contacts> AddressBook = new ArrayList<Contacts>();
+	Contacts newContact = new Contacts();
 	public static void main(String[] args) {
-		 System.out.println("Welcome to address book program");
-		 AddressBook  contacts =new AddressBook();
-		 contacts.printContacts();
-		  }
+	    instructions();
+	    menu();
+	    }
+	    public static void menu() {
+	        boolean quit = false;
+	        int choice = 0;
+	        while (!quit) {
+	            System.out.println("Enter your choice:");
+	            choice = scanner.nextInt();
+	            scanner.nextLine();
+	            switch (choice) {
+	                case 0:
+	                    instructions();
+	                case 1:
+	                    quit = true;
+	                    break;
+	                case 2:
+	                    contactsList.printContacts();
+	                 break;
+	                case 3:
+	                addContact();
+	                  break;
+	                default:
+	                 break;
+	}
+	        }
+	}
+	public static void addContact() {
+	    System.out.println("Enter the name of the new contact");
+	    String newContact = scanner.nextLine(); 
+	    contactsList.addNewContact(newContact);
+	}
+
+	public static void instructions() {
+	    System.out.println("1)Quit\n2)List of contacts\n3)Add new contact\n");
+
+	}
 	}
