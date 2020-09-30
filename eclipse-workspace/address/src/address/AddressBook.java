@@ -27,23 +27,32 @@ public class AddressBook{
 	                    break;
 	                case 2:
 	                    contactsList.printContacts();
-	                 break;
-	                case 3:
-	                addContact();
 	                  break;
+	                case 3:
+	                    addContact();
+	                    break;
+	                case 4:
+	                    updateContact();
+	                    break;   
 	                default:
 	                 break;
 	}
 	        }
 	}
-	public static void addContact() {
-	    System.out.println("Enter the name of the new contact");
-	    String newContact = scanner.nextLine(); 
-	    contactsList.addNewContact(newContact);
-	}
-
+	    public static void addContact() {
+	        System.out.println("Enter the name of the new contact");
+	        String newContact = scanner.nextLine();
+	        contactsList.addNewContact(newContact);
+	    }
+	    public static void updateContact() {
+	        System.out.println("Enter the name of the contact that you want to replace");
+	        String replacedName = scanner.nextLine();
+	        System.out.println("Enter the updated name");
+	        String newName = scanner.nextLine();
+	        contactsList.updateContact(replacedName, newName);
+	    }
 	public static void instructions() {
-	    System.out.println("1)Quit\n2)List of contacts\n3)Add new contact\n");
+	    System.out.println("1)Quit\n2)List of contacts\n3)Add new contact\n4}Update existing contact\n");
 
 	}
 	}
