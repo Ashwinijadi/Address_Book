@@ -32,8 +32,11 @@ public class AddressBook{
 	                    addContact();
 	                    break;
 	                case 4:
-	                    updateContact();
-	                    break;   
+	                    editContact();
+	                    break;
+	                case 5:
+	                	removeContact();
+	                    break;
 	                default:
 	                 break;
 	}
@@ -44,15 +47,30 @@ public class AddressBook{
 	        String newContact = scanner.nextLine();
 	        contactsList.addNewContact(newContact);
 	    }
-	    public static void updateContact() {
+	    public static void editContact() {
 	        System.out.println("Enter the name of the contact that you want to replace");
 	        String replacedName = scanner.nextLine();
 	        System.out.println("Enter the updated name");
 	        String newName = scanner.nextLine();
-	        contactsList.updateContact(replacedName, newName);
+	        contactsList.editContact(replacedName, newName);
+	    }
+	    public static void removeContact() {
+	        System.out.println("Which contact do you wish to remove?");
+	        String removedContact = scanner.nextLine();
+	        contactsList.removeContact(removedContact);
+	    }
+	    public static void searchContact() {
+	        System.out.println("Which contact are you looking for?");
+	        String contactName = scanner.nextLine();
+	        int index = contactsList.findContact(contactName);
+	        if (index >= 0) {
+	            System.out.println(contactsList.findContact(contactName) + 1 + ") " + contactName);
+	        } else {
+	            System.out.println("No such contact found.");
+	        }
 	    }
 	public static void instructions() {
-	    System.out.println("1)Quit\n2)List of contacts\n3)Add new contact\n4}Update existing contact\n");
+	    System.out.println("1)Quit\n2)List of contacts\n3)Add new contact\n4}edit existing contact\n");
 
 	}
 	}
