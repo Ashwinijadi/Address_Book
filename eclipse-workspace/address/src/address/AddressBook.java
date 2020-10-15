@@ -31,9 +31,9 @@ public class AddressBook {
 		int ch = input.nextInt();
 		if (ch == 1) {
 			System.out.println("Enter the name of address book");
-			String aBName=input.nextLine();
+			String aBName = input.nextLine();
 			input.nextLine();
-			addressBookSystem.addAddressBook(aBName,address);
+			addressBookSystem.addAddressBook(aBName, address);
 			int choice = 0;
 			do {
 				System.out.println("\n[1] Add contact");
@@ -63,7 +63,7 @@ public class AddressBook {
 
 			} while (choice != 4);
 		}
-		if(ch!=1) {
+		if (ch != 1) {
 			System.exit(0);
 		}
 	}
@@ -95,12 +95,17 @@ public class AddressBook {
 			System.out.print("zip:");
 			zip = input.nextLong();
 			input.nextLine();
-			Contacts contact = new Contacts(firstName, lastName, addressCity, State, phoneNumber, email, zip);
-			address.addContacts(contact);
-    
+			boolean duplicate_Check = (address.getAddress()).stream().noneMatch(
+					Contacts -> Contacts.getfirstName().equals(firstName) && Contacts.getlastName().equals(lastName));
+
+			if (duplicate_Check) {
+				Contacts contact = new Contacts(firstName, lastName, addressCity, State, phoneNumber, email, zip);
+				address.addContacts(contact);
+			} else
+				System.out.println("Name already exists");
 		}
 	}
-	
+
 	public ArrayList<Contacts> editContact(String firstName) {
 		ArrayList<Contacts> obj = new ArrayList<Contacts>();
 		for (int contactSearch = 0; contactSearch < addressBook.size(); contactSearch++) {
