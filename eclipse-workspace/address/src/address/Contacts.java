@@ -1,27 +1,18 @@
 package address;
 
-import java.util.ArrayList;
-
 public class Contacts {
-	private ArrayList<String> contacts = new ArrayList<>();
-
-	public void printContacts() {
-		System.out.println("You have " + contacts.size() + " contacts.");
-		for (int i = 0; i < contacts.size(); i++) {
-			System.out.println((i + 1) + ". " + contacts.get(i));
-		}
-	}
 
 	private String lastName;
 	private String firstName;
 	private String addressCity;
 	private String State;
-	private String phoneNumber;
+	private long  phoneNumber;
 	private String email;
-	private String zip;
+	private long  zip;
 
-	public Contacts(String lastName, String firstName, String addressCity, String State, String phoneNumber,
-			String email, String zip) {
+	public Contacts(String firstName, String lastName, String addressCity, String State, long  phoneNumber,
+			String email, long zip) {
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.addressCity = addressCity;
@@ -35,68 +26,56 @@ public class Contacts {
 		return firstName;
 	}
 
-	public String setfirstName() {
-		return (this.firstName = firstName);
+	public void setfirstName(String firstName) {
+	this.firstName = firstName;
 	}
 
 	public String getlastName() {
 		return lastName;
 	}
 
-	public String setlastName() {
-		return (this.lastName = lastName);
+	public void setlastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getaddressCity() {
 		return addressCity;
 	}
 
-	public String setaddressCity() {
-		return (this.addressCity = addressCity);
+	public void setaddressCity(String addressCity) {
+		this.addressCity = addressCity;
 	}
 
 	public String getState() {
 		return State;
 	}
 
-	public String setState() {
-		return (this.State = State);
+	public void setState(String State) {
+		this.State = State;
 	}
 
 	public String getemail() {
 		return email;
 	}
 
-	public String setemail() {
-		return (this.email = email);
+	public void setemail(String email) {
+		this.email = email;
 	}
 
-	public String getphoneNumber() {
+	public long getphoneNumber() {
 		return phoneNumber;
 	}
 
-	public String setphoneNumber() {
-		return (this.phoneNumber = phoneNumber);
+	public void setphoneNumber(long  phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
-	public String getzip() {
+	public long getzip() {
 		return zip;
 	}
 
-	public String setzip() {
-		return (this.zip = zip);
+	public void setzip(long zip) {
+		this.zip = zip;
 	}
 
-	public void editContact(String replacedContact, String newContact) {
-		int index = findContact(replacedContact);
-		if (index >= 0) {
-			contacts.set(findContact(replacedContact), newContact);
-		} else {
-			System.out.println("No such contact found to update");
-		}
-	}
-
-	public int findContact(String contact) {
-		return contacts.indexOf(contact);
-	}
 }
