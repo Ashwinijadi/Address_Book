@@ -2,6 +2,7 @@ package address;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -30,7 +31,7 @@ public class AddressBook {
 		AddressBookSystem addressBookSystem = new AddressBookSystem();
 		while (true) {
 			System.out.println(
-					"[1]AddressBook \n[2] Enter the city name to search person \n[3] enter state name to search person \n[4]Exit \nEnter Choice");
+					"[1]AddressBook \n[2] Enter the city name to search person \n[3] enter state name to search person \n[4]Do you want to sort alphabetically\n[5]Exit \nEnter Choice");
 			int ch = input.nextInt();
 			if (ch == 1) {
 				System.out.println("Enter the name of address book");
@@ -69,6 +70,11 @@ public class AddressBook {
 			if (ch == 3) {
 				address.searchForPersonInState();
 			}
+			if (ch == 4) {
+				sortByPersonNameAlphabetically();
+			}
+			if (ch == 5)
+				break;
 		}
 	}
 
@@ -244,5 +250,18 @@ public class AddressBook {
 			System.out.println(c + "count of person is " + count);
 		for (Contacts person : searchByState)
 			System.out.println("person name " + person.getfirstName() + " " + person.getlastName());
+	}
+
+	public static void sortByPersonNameAlphabetically() {
+		long count = 0;
+		List<Contacts> searchByName = new ArrayList<>();
+		searchByName = (address.getAddress()).stream().sorted(Comparator.comparing(Contacts::getfirstName))
+				.collect(Collectors.toList());
+		count = searchByName.stream().count();
+		for (Contacts c : searchByName)
+			System.out.println(c + "count of person is " + count);
+		// filter(Contact -> Contact.getfirstName().equals(stateSearch))
+		for (Contacts p2 : searchByName)
+			System.out.println("person name " + p2.getfirstName() + " " + p2.getlastName());
 	}
 }
