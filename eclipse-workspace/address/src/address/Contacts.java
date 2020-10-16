@@ -6,16 +6,26 @@ public class Contacts {
 	private String firstName;
 	private String addressCity;
 	private String State;
-	private long  phoneNumber;
+	private long phoneNumber;
 	private String email;
-	private long  zip;
+	private long zip;
+	private String city;
 
-	public Contacts(String firstName, String lastName, String addressCity, String State, long  phoneNumber,
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public Contacts(String firstName, String lastName, String addressCity, String city, String State, long phoneNumber,
 			String email, long zip) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.addressCity = addressCity;
+		this.city = city;
 		this.State = State;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
@@ -27,7 +37,7 @@ public class Contacts {
 	}
 
 	public void setfirstName(String firstName) {
-	this.firstName = firstName;
+		this.firstName = firstName;
 	}
 
 	public String getlastName() {
@@ -66,7 +76,7 @@ public class Contacts {
 		return phoneNumber;
 	}
 
-	public void setphoneNumber(long  phoneNumber) {
+	public void setphoneNumber(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
