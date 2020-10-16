@@ -71,10 +71,17 @@ public class AddressBook {
 				address.searchForPersonInState();
 			}
 			if (ch == 4) {
-				sortByPersonNameAlphabetically();
+				address.sortByCityNameAlphabetically();
 			}
-			if (ch == 5)
+			if (ch == 5) {
+				address.sortByStateNameAlphabetically();
+			}
+			if (ch == 6) {
+				address.sortByZip();
+			}
+			if (ch == 7) {
 				break;
+			}
 		}
 	}
 
@@ -249,7 +256,7 @@ public class AddressBook {
 		for (Contacts c : searchByState)
 			System.out.println(c + "count of person is " + count);
 		for (Contacts person : searchByState)
-			System.out.println("person name " + person.getfirstName() + " " + person.getlastName());
+			System.out.println(person + "person name " + person.getfirstName() + " " + person.getlastName());
 	}
 
 	public static void sortByPersonNameAlphabetically() {
@@ -262,6 +269,45 @@ public class AddressBook {
 			System.out.println(c + "count of person is " + count);
 		// filter(Contact -> Contact.getfirstName().equals(stateSearch))
 		for (Contacts p2 : searchByName)
-			System.out.println("person name " + p2.getfirstName() + " " + p2.getlastName());
+			System.out.println(p2 + "person name " + p2.getfirstName() + " " + p2.getlastName());
+	}
+
+	public static void sortByCityNameAlphabetically() {
+		long count = 0;
+		List<Contacts> sortByCity = new ArrayList<>();
+		sortByCity = (address.getAddress()).stream().sorted(Comparator.comparing(Contacts::getCity))
+				.collect(Collectors.toList());
+		count = sortByCity.stream().count();
+		for (Contacts c : sortByCity)
+			System.out.println("count of person is " + count);
+		// filter(Contact -> Contact.getfirstName().equals(stateSearch))
+		for (Contacts p1 : sortByCity)
+			System.out.println("City name sorted order" + p1 + " " + p1.getCity());
+	}
+
+	public static void sortByStateNameAlphabetically() {
+		long count = 0;
+		List<Contacts> sortByState = new ArrayList<>();
+		sortByState = (address.getAddress()).stream().sorted(Comparator.comparing(Contacts::getState))
+				.collect(Collectors.toList());
+		count = sortByState.stream().count();
+		for (Contacts c : sortByState)
+			System.out.println("count of person is " + count);
+		// filter(Contact -> Contact.getfirstName().equals(stateSearch))
+		for (Contacts p3 : sortByState)
+			System.out.println("State name sorted order:" + p3 + " " + p3.getState());
+	}
+
+	public static void sortByZip() {
+		long count = 0;
+		List<Contacts> sortByZip = new ArrayList<>();
+		sortByZip = (address.getAddress()).stream().sorted(Comparator.comparing(Contacts::getzip))
+				.collect(Collectors.toList());
+		count = sortByZip.stream().count();
+		for (Contacts c : sortByZip)
+			System.out.println("count of person is " + count);
+		// filter(Contact -> Contact.getfirstName().equals(stateSearch))
+		for (Contacts p4 : sortByZip)
+			System.out.println("State name sorted order:" + p4 + " " + p4.getzip());
 	}
 }
