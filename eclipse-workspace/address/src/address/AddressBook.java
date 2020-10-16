@@ -2,6 +2,7 @@ package address;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -219,20 +220,13 @@ public class AddressBook {
 		String citySearch = input.nextLine();
 		long count = 0;
 		AddressBookSystem addressBookSystem = new AddressBookSystem();
-		ArrayList<Contacts> search = new ArrayList<>();
-		for (AddressBook book : (addressBookSystem.getAddressBookSystem().values())) {
-			search.addAll((book.getAddress()).stream()
-					.filter(Contact -> (Contact.getCity()).equalsIgnoreCase(citySearch)).collect(Collectors.toList()));
-			count = search.stream().count();
-		}
+		List<Contacts> search = new ArrayList<>();
+		search = (address.getAddress()).stream().filter(Contact -> Contact.getCity().equals(citySearch))
+				.collect(Collectors.toList());
 		for (Contacts c : search)
 			System.out.println(c + " " + count);
-		if (count == 0) {
-			System.out.println("city name exist");
-		}
-		if (count != 0) {
-			System.out.println("city name does not exist,please enter valid city name ");
-		}
+		for (Contacts p : search)
+			System.out.println("person name " + p.getfirstName() + " " + p.getlastName());
 	}
 
 	public static void searchForPersonInState() {
@@ -241,20 +235,11 @@ public class AddressBook {
 		String stateSearch = input.nextLine();
 		long count = 0;
 		AddressBookSystem addressBookSystem = new AddressBookSystem();
-		ArrayList<Contacts> search = new ArrayList<>();
-		for (AddressBook book : (addressBookSystem.getAddressBookSystem().values())) {
-			search.addAll(
-					(book.getAddress()).stream().filter(Contact -> (Contact.getState()).equalsIgnoreCase(stateSearch))
-							.collect(Collectors.toList()));
-			count = search.stream().count();
-		}
-		for (Contacts c : search)
-			System.out.println(c + " " + count);
-		if (count == 0) {
-			System.out.println("state name exist");
-		}
-		if (count != 0) {
-			System.out.println("state name does not exist,please enter valid state name ");
-		}
+		List<Contacts> searchByState = new ArrayList<>();
+		searchByState = (address.getAddress()).stream().filter(Contact -> Contact.getState().equals(stateSearch))
+				.collect(Collectors.toList());
+		// count = search.stream().count();
+		for (Contacts person : searchByState)
+			System.out.println("person name " + person.getfirstName() + " " + person.getlastName());
 	}
 }

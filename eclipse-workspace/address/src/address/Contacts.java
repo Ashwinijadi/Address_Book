@@ -88,4 +88,10 @@ public class Contacts {
 		this.zip = zip;
 	}
 
+	@Override
+	public String toString() {
+		return "Contacts [lastName=" + lastName + ", firstName=" + firstName + ", addressCity=" + addressCity
+				+ ", State=" + State + ", phoneNumber=" + phoneNumber + ", email=" + email + ", zip=" + zip + ", city="
+				+ city + "]";
+	}
 }
