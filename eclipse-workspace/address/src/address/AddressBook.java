@@ -31,7 +31,7 @@ public class AddressBook {
 		AddressBookSystem addressBookSystem = new AddressBookSystem();
 		while (true) {
 			System.out.println(
-					"[1]AddressBook \n[2] Enter the city name to search person \n[3] enter state name to search person \n[4]Do you want to sort alphabetically\n[5]Exit \nEnter Choice");
+					"[1]AddressBook \n[2]Enter the city name to search person \n[3]Enter state name to search person \n[4]sort by person name alphabetically\n[5]sort by city\n[6]sort by state\n[7]sort by zip \n[8]Exit \nEnter Choice");
 			int ch = input.nextInt();
 			if (ch == 1) {
 				System.out.println("Enter the name of address book");
@@ -71,15 +71,17 @@ public class AddressBook {
 				address.searchForPersonInState();
 			}
 			if (ch == 4) {
+			address.sortByPersonNameAlphabetically();}
+			if (ch == 5) {
 				address.sortByCityNameAlphabetically();
 			}
-			if (ch == 5) {
+			if (ch == 6) {
 				address.sortByStateNameAlphabetically();
 			}
-			if (ch == 6) {
+			if (ch == 7) {
 				address.sortByZip();
 			}
-			if (ch == 7) {
+			if (ch == 8) {
 				break;
 			}
 		}
