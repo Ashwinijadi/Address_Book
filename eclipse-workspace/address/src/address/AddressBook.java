@@ -223,8 +223,9 @@ public class AddressBook {
 		List<Contacts> search = new ArrayList<>();
 		search = (address.getAddress()).stream().filter(Contact -> Contact.getCity().equals(citySearch))
 				.collect(Collectors.toList());
+		count = search.stream().count();
 		for (Contacts c : search)
-			System.out.println(c + " " + count);
+			System.out.println(c + " count of person is " + count);
 		for (Contacts p : search)
 			System.out.println("person name " + p.getfirstName() + " " + p.getlastName());
 	}
@@ -238,7 +239,9 @@ public class AddressBook {
 		List<Contacts> searchByState = new ArrayList<>();
 		searchByState = (address.getAddress()).stream().filter(Contact -> Contact.getState().equals(stateSearch))
 				.collect(Collectors.toList());
-		// count = search.stream().count();
+		count = searchByState.stream().count();
+		for (Contacts c : searchByState)
+			System.out.println(c + "count of person is " + count);
 		for (Contacts person : searchByState)
 			System.out.println("person name " + person.getfirstName() + " " + person.getlastName());
 	}
