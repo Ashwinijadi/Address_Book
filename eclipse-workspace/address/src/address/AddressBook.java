@@ -46,13 +46,13 @@ public class AddressBook {
 
 					switch (choice) {
 					case 1:
-						address.addContact();
+						AddressBook.addContact();
 						break;
 					case 2:
-						address.editContacts();
+						AddressBook.editContacts();
 						break;
 					case 3:
-						address.deleteContact();
+						AddressBook.deleteContact();
 						break;
 					case 4:
 						System.out.println("Thanks for Entering");
@@ -65,21 +65,21 @@ public class AddressBook {
 				} while (choice == 4);
 			}
 			if (ch == 2) {
-				address.search_ForPersonIn_City();
+				AddressBook.search_ForPersonIn_City();
 			}
 			if (ch == 3) {
-				address.searchForPersonInState();
+				AddressBook.searchForPersonInState();
 			}
 			if (ch == 4) {
-			address.sortByPersonNameAlphabetically();}
+			AddressBook.sortByPersonNameAlphabetically();}
 			if (ch == 5) {
-				address.sortByCityNameAlphabetically();
+				AddressBook.sortByCityNameAlphabetically();
 			}
 			if (ch == 6) {
-				address.sortByStateNameAlphabetically();
+				AddressBook.sortByStateNameAlphabetically();
 			}
 			if (ch == 7) {
-				address.sortByZip();
+				AddressBook.sortByZip();
 			}
 			if (ch == 8) {
 				break;
