@@ -1,21 +1,29 @@
 package address;
 
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import com.google.gson.Gson;
 
 public class AddressBook {
 	public static ArrayList<Contacts> addressBook = new ArrayList<Contacts>();
+	private static final String CSV_FILE = "/Users/Dell/eclipse-workspace/address/src/AddressBook_CSV.csv";
+	private static final String JSON_FILE = "/Users/Dell/eclipse-workspace/address/src/AddressBook_JSON.json";
 
 	public static ArrayList<Contacts> getAddress() {
 		return addressBook;
 	}
 
 	public void setAddress(ArrayList<Contacts> addressBook) {
-		this.addressBook = addressBook;
+		AddressBook.addressBook = addressBook;
 	}
 
 	public void addContacts(Contacts cobj) {
@@ -25,13 +33,15 @@ public class AddressBook {
 	private static Scanner input = new Scanner(System.in);
 	private static AddressBook address = new AddressBook();
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		System.out.println("Welcome to AddressBookSystem");
 		AddressBook address = new AddressBook();
 		AddressBookSystem addressBookSystem = new AddressBookSystem();
 		while (true) {
-			System.out.println(
-					"[1]AddressBook \n[2]Enter the city name to search person \n[3]Enter state name to search person \n[4]sort by person name alphabetically\n[5]sort by city\n[6]sort by state\n[7]sort by zip \n[8]Exit \nEnter Choice");
+			System.out.println("[1]AddressBook \n[2]Enter the city name to search person "
+					+ "\n[3]Enter state name to search person \n[4]sort by person name alphabetically"
+					+ "\n[5]sort by city\n[6]sort by state\n[7]sort by zip  "
+					+ "\n[8]Read JSON \n[9]Write JSON \n[10]Exit \nEnter Choice");
 			int ch = input.nextInt();
 			if (ch == 1) {
 				System.out.println("Enter the name of address book");
@@ -71,7 +81,8 @@ public class AddressBook {
 				AddressBook.searchForPersonInState();
 			}
 			if (ch == 4) {
-			AddressBook.sortByPersonNameAlphabetically();}
+				AddressBook.sortByPersonNameAlphabetically();
+			}
 			if (ch == 5) {
 				AddressBook.sortByCityNameAlphabetically();
 			}
@@ -82,7 +93,11 @@ public class AddressBook {
 				AddressBook.sortByZip();
 			}
 			if (ch == 8) {
-				break;
+				AddressBook.readDataJson();
+
+			}
+			if (ch == 9) {
+				AddressBook.writeDataJson();
 			}
 		}
 	}
@@ -141,7 +156,6 @@ public class AddressBook {
 	}
 
 	public static void deleteContact() {
-		AddressBook address = new AddressBook();
 		System.out.println("enter first name of contact to delete");
 		String fname = input.nextLine();
 		input.nextLine();
@@ -178,7 +192,7 @@ public class AddressBook {
 			System.out.println("Enter the First Name to update : ");
 			String first = input.nextLine();
 			input.nextLine();
-			contactlist = address.editContact(first);
+			contactlist = AddressBook.editContact(first);
 			System.out.println("Select the detail to be updated : ");
 			System.out.println("1.First Name\n2.Last Name\n3.Address\n4.City\n5.State\n6.Zip\n7.Phone Number\n8.Email");
 			int c = input.nextInt();
@@ -229,12 +243,12 @@ public class AddressBook {
 		return contact;
 	}
 
+	@SuppressWarnings("static-access")
 	public static void search_ForPersonIn_City() {
 		System.out.println("Enter the City Name to Search for Persons :");
 		input.nextLine();
 		String citySearch = input.nextLine();
 		long count = 0;
-		AddressBookSystem addressBookSystem = new AddressBookSystem();
 		List<Contacts> search = new ArrayList<>();
 		search = (address.getAddress()).stream().filter(Contact -> Contact.getCity().equals(citySearch))
 				.collect(Collectors.toList());
@@ -245,12 +259,12 @@ public class AddressBook {
 			System.out.println("person name " + p.getfirstName() + " " + p.getlastName());
 	}
 
+	@SuppressWarnings("static-access")
 	public static void searchForPersonInState() {
 		System.out.println("Enter the State Name to Search for Persons :");
 		input.nextLine();
 		String stateSearch = input.nextLine();
 		long count = 0;
-		AddressBookSystem addressBookSystem = new AddressBookSystem();
 		List<Contacts> searchByState = new ArrayList<>();
 		searchByState = (address.getAddress()).stream().filter(Contact -> Contact.getState().equals(stateSearch))
 				.collect(Collectors.toList());
@@ -267,8 +281,7 @@ public class AddressBook {
 		searchByName = (address.getAddress()).stream().sorted(Comparator.comparing(Contacts::getfirstName))
 				.collect(Collectors.toList());
 		count = searchByName.stream().count();
-		for (Contacts c : searchByName)
-			System.out.println(c + "count of person is " + count);
+		System.out.println("count of person is " + count);
 		// filter(Contact -> Contact.getfirstName().equals(stateSearch))
 		for (Contacts p2 : searchByName)
 			System.out.println(p2 + "person name " + p2.getfirstName() + " " + p2.getlastName());
@@ -280,21 +293,20 @@ public class AddressBook {
 		sortByCity = (address.getAddress()).stream().sorted(Comparator.comparing(Contacts::getCity))
 				.collect(Collectors.toList());
 		count = sortByCity.stream().count();
-		for (Contacts c : sortByCity)
-			System.out.println("count of person is " + count);
+		System.out.println("count of person is " + count);
 		// filter(Contact -> Contact.getfirstName().equals(stateSearch))
 		for (Contacts p1 : sortByCity)
 			System.out.println("City name sorted order" + p1 + " " + p1.getCity());
 	}
 
+	@SuppressWarnings("static-access")
 	public static void sortByStateNameAlphabetically() {
 		long count = 0;
 		List<Contacts> sortByState = new ArrayList<>();
 		sortByState = (address.getAddress()).stream().sorted(Comparator.comparing(Contacts::getState))
 				.collect(Collectors.toList());
 		count = sortByState.stream().count();
-		for (Contacts c : sortByState)
-			System.out.println("count of person is " + count);
+		System.out.println("count of person is " + count);
 		// filter(Contact -> Contact.getfirstName().equals(stateSearch))
 		for (Contacts p3 : sortByState)
 			System.out.println("State name sorted order:" + p3 + " " + p3.getState());
@@ -306,10 +318,29 @@ public class AddressBook {
 		sortByZip = (address.getAddress()).stream().sorted(Comparator.comparing(Contacts::getzip))
 				.collect(Collectors.toList());
 		count = sortByZip.stream().count();
-		for (Contacts c : sortByZip)
-			System.out.println("count of person is " + count);
+		System.out.println("count of person is " + count);
 		// filter(Contact -> Contact.getfirstName().equals(stateSearch))
 		for (Contacts p4 : sortByZip)
 			System.out.println("State name sorted order:" + p4 + " " + p4.getzip());
+	}
+
+	// reading data
+	public static void readDataJson() throws IOException, NullPointerException {
+		List<Contacts> read = new ArrayList<Contacts>();
+		try {
+			Reader reader = Files.newBufferedReader(Paths.get(JSON_FILE));
+			System.out.println(read.addAll(Arrays.asList(new Gson().fromJson(reader, Contacts[].class))));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// writing data into file
+	public static void writeDataJson() throws IOException {
+		Writer writer = Files.newBufferedWriter(Paths.get(JSON_FILE));
+		List<Contacts> write = new ArrayList<>();
+		write = (address.getAddress()).stream().collect(Collectors.toList());
+		new Gson().toJson(write, writer);
+		writer.close();
 	}
 }
